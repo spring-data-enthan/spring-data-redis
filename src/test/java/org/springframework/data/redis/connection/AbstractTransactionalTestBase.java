@@ -147,7 +147,7 @@ public abstract class AbstractTransactionalTestBase {
 	public void listOperationLPushShoudBeRolledBackCorrectly() {
 
 		for (String key : KEYS) {
-			template.opsForList().leftPushAll(key, (String[]) KEYS.toArray());
+			template.opsForList().leftPushAll(key, KEYS.toArray(new String[0]));
 		}
 	}
 
@@ -157,7 +157,7 @@ public abstract class AbstractTransactionalTestBase {
 
 		this.valuesShouldHaveBeenPersisted = true;
 		for (String key : KEYS) {
-			template.opsForList().leftPushAll(key, (String[]) KEYS.toArray());
+			template.opsForList().leftPushAll(key, KEYS.toArray(new String[0]));
 		}
 	}
 }
