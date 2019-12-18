@@ -47,6 +47,7 @@ public class MessageListenerTest {
 	private static final byte[] RAW_PAYLOAD = serializer.serialize(PAYLOAD);
 	private static final Message STRING_MSG = new DefaultMessage(RAW_CHANNEL, RAW_PAYLOAD);
 
+	// 
 	private MessageListenerAdapter adapter;
 
 	public static interface Delegate {
