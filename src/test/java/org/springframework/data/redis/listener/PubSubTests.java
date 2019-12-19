@@ -66,6 +66,7 @@ public class PubSubTests<T> {
 	private final Object handler = new Object() {
 		@SuppressWarnings("unused")
 		public void handleMessage(Object message) {
+			System.out.println("handleMessage => " + message);
 			bag.add(message);
 		}
 	};

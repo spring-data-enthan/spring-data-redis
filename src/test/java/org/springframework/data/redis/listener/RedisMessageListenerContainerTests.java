@@ -41,7 +41,9 @@ public class RedisMessageListenerContainerTests {
 	private final Object handler = new Object() {
 
 		@SuppressWarnings("unused")
-		public void handleMessage(Object message) {}
+		public void handleMessage(Object message) {
+			System.out.println("handleMessage => " + message);
+		}
 	};
 
 	private final MessageListenerAdapter adapter = new MessageListenerAdapter(handler);

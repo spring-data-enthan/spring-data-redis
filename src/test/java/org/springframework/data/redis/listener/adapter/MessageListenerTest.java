@@ -47,14 +47,18 @@ public class MessageListenerTest {
 	private static final byte[] RAW_PAYLOAD = serializer.serialize(PAYLOAD);
 	private static final Message STRING_MSG = new DefaultMessage(RAW_CHANNEL, RAW_PAYLOAD);
 
-	// 
+	// MessageListenerAdapter自身作为delegate
 	private MessageListenerAdapter adapter;
 
+	// 自定义delegate接口，不继承MessageListener
 	public static interface Delegate {
+		// 默认接收消息的方法 handleMessage
 		void handleMessage(String argument);
 
+		// 自定义接收消息的方法
 		void customMethod(String arg);
 
+		// 自定义接收消息的方法
 		void customMethodWithChannel(String arg, String channel);
 	}
 
@@ -77,6 +81,7 @@ public class MessageListenerTest {
 		assertThat(adapter.getDefaultListenerMethod()).isEqualTo(MessageListenerAdapter.ORIGINAL_DEFAULT_LISTENER_METHOD);
 	}
 
+	@Test
 	public void testAdapterWithListenerAndDefaultMessage() throws Exception {
 		MessageListener mock = mock(MessageListener.class);
 
@@ -102,6 +107,7 @@ public class MessageListenerTest {
 	@Test
 	public void testCustomMethod() throws Exception {
 		MessageListenerAdapter adapter = new MessageListenerAdapter(target);
+		// 替换默认接收消息的方法handleMessage为customMethod
 		adapter.setDefaultListenerMethod("customMethod");
 		adapter.afterPropertiesSet();
 
@@ -112,6 +118,7 @@ public class MessageListenerTest {
 
 	@Test
 	public void testCustomMethodWithAlternateConstructor() throws Exception {
+		// 指定delegate和接收消息方法customMethod构建MessageListenerAdapter
 		MessageListenerAdapter adapter = new MessageListenerAdapter(target, "customMethod");
 		adapter.afterPropertiesSet();
 

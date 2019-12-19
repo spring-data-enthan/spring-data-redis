@@ -88,6 +88,7 @@ public abstract class KeyspaceEventMessageListener implements MessageListener, I
 
 				Properties config = connection.getConfig("notify-keyspace-events");
 
+				// 没有开启 notify-keyspace-events, 则修改为EA (所有数据类型的键事件通知)
 				if (!StringUtils.hasText(config.getProperty("notify-keyspace-events"))) {
 					connection.setConfig("notify-keyspace-events", keyspaceNotificationsConfigParameter);
 				}

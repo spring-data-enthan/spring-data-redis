@@ -326,6 +326,7 @@ public class ReactiveRedisMessageListenerContainer implements DisposableBean {
 				.newUpdater(Subscribers.class, "subscribers");
 
 		// accessed via SUBSCRIBERS
+		// 统计注册的订阅数量
 		@SuppressWarnings("unused") private volatile long subscribers;
 
 		/**
@@ -351,10 +352,12 @@ public class ReactiveRedisMessageListenerContainer implements DisposableBean {
 
 			long value = SUBSCRIBERS.get(this);
 
+			// 没有订阅者注册
 			if (value <= 0) {
 				return false;
 			}
 
+			// 比较设置后 注册数量等于1
 			if (SUBSCRIBERS.compareAndSet(this, value, value - 1) && value == 1) {
 				return true;
 			}

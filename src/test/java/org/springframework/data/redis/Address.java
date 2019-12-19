@@ -16,12 +16,14 @@
 package org.springframework.data.redis;
 
 import java.io.Serializable;
+import lombok.ToString;
 
 /**
  * Simple serializable class.
  *
  * @author Costin Leau
  */
+@ToString
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 4924045450477798779L;
