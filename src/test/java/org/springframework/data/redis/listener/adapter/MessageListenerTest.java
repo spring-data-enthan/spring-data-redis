@@ -228,6 +228,7 @@ public class MessageListenerTest {
 		adapter.setDefaultListenerMethod("handleMessageOnly");
 		adapter.afterPropertiesSet();
 
+		// 模拟接收到消息
 		adapter.onMessage(new DefaultMessage("channel1".getBytes(), "body".getBytes()), "".getBytes());
 
 		verify(listener, times(1)).handleMessageOnly(anyString());
@@ -243,6 +244,7 @@ public class MessageListenerTest {
 		adapter.setSerializer(null);
 		adapter.afterPropertiesSet();
 
+		// 模拟接收到消息
 		adapter.onMessage(new DefaultMessage("channel1".getBytes(), "body".getBytes()), "".getBytes());
 
 		verify(listener, times(1)).handle(any(byte[].class), anyString());
@@ -258,6 +260,7 @@ public class MessageListenerTest {
 		adapter.setSerializer(new PojoRedisSerializer());
 		adapter.afterPropertiesSet();
 
+		// 模拟接收到消息
 		adapter.onMessage(new DefaultMessage(new byte[0], "body".getBytes()), "".getBytes());
 
 		verify(listener, times(1)).handle(any(Pojo.class), anyString());
